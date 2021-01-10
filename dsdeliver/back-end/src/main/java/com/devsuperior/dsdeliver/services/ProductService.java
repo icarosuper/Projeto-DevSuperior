@@ -1,5 +1,6 @@
 package com.devsuperior.dsdeliver.services;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.dsdeliver.dto.OrderDTO;
 import com.devsuperior.dsdeliver.dto.ProductDTO;
+import com.devsuperior.dsdeliver.entities.Order;
+import com.devsuperior.dsdeliver.entities.OrderStatus;
 import com.devsuperior.dsdeliver.entities.Product;
 import com.devsuperior.dsdeliver.repositories.ProductRepository;
 
@@ -20,5 +24,12 @@ public class ProductService {
 	public List<ProductDTO> findAll(){
 		List<Product> list = repository.findAllByOrderByNameAsc();
 		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+	}
+	
+	@Transactional
+	public ProductDTO insert(ProductDTO dto){
+		Product product = new Product(null, dto.getName(), dto.getPrice(), dto.getDescription(), dto.getImageUri());
+		product = repository.save(product);
+		return new ProductDTO(product);
 	}
 }
