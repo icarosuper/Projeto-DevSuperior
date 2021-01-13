@@ -18,7 +18,7 @@ exports.getAllProducts = async (req, res) => {
 
 		products = await products;
 
-		res.status(200).json({products});
+		res.status(200).json([...products]);
 	} catch (err) {
 		res.status(404).json({
 			status: 'fail',
