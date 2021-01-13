@@ -14,5 +14,8 @@
     "class-methods-use-this": "off",
     "prefer-destructuring": ["warn", { "object": true, "array": true }],
     "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }]
+  },
+  "engines": {
+	  "node": ">=10.0.0"
   }
 }

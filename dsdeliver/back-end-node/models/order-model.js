@@ -22,8 +22,12 @@ const orderSchema = new mongoose.Schema({
 		type: OrderStatus,
 		default: OrderStatus.PENDING,
 	},
+	products: {
+		type: [String],
+		required: [true, 'Um pedido deve ter ao menos um produto']
+	},
 });
 
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Orders', orderSchema);
 
 module.exports = Order;
