@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const OrderStatus = require('./order-status');
+const Product = require('./product-model');
 
 const orderSchema = new mongoose.Schema({
 	address: {
@@ -23,7 +24,7 @@ const orderSchema = new mongoose.Schema({
 		default: OrderStatus.PENDING,
 	},
 	products: {
-		type: [String],
+		type: [Product.schema],
 		required: [true, 'Um pedido deve ter ao menos um produto']
 	},
 });
