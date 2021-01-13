@@ -1,7 +1,8 @@
 import axios from "axios";
 import { OrderPayLoad } from "./Orders/types";
 
-const url = process.env.REACT_APP_API_URL;
+let url = '';
+process.env.REACT_APP_BACK_END === 'node' ? url = process.env.REACT_APP_NODE! : url = process.env.REACT_APP_JAVA!;
 const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export function fetchProducts(){
