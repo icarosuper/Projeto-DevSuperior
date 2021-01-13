@@ -7,8 +7,9 @@ function Navbar(){
 		<nav className="main-navbar">
 			<Logo />
 			<Link to="/" className="logo-text">
-				Ds Delivery
+				MottaDelivery
 			</Link>
+
 		</nav>
 	)
 }
