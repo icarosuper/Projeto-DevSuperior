@@ -58,20 +58,15 @@ exports.addOrder = async (req, res) => {
 		let products = [];
 
 		for(const item of req.body.products){
-			const product = await Product.findById(item.id);
+			const product = await Product.findById(item.id).select('-__v');
 			products.push(product);
 		}
 
 		req.body.products = products;
 
-		console.log(req.body);
-
 		const newOrder = await Order.create(req.body);
 		
-		res.status(201).json({
-			status: 'success',
-			data: { order: newOrder },
-		});
+		res.status(201).json(newOrder);
 	} catch (err) {
 		res.status(400).json({
 			status: 'fail',
