@@ -62,6 +62,10 @@ exports.addOrder = async (req, res) => {
 			products.push(product);
 		}
 
+		if(!products.length){
+			throw new Error('Um pedido deve conter ao menos um produto.');
+		}
+
 		req.body.products = products;
 
 		const newOrder = await Order.create(req.body);
