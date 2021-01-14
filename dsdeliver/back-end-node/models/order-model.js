@@ -29,6 +29,16 @@ const orderSchema = new mongoose.Schema({
 	},
 });
 
+// Duplicate the ID field.
+orderSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+orderSchema.set('toJSON', {
+    virtuals: true
+});
+
 const Order = mongoose.model('Orders', orderSchema);
 
 module.exports = Order;
