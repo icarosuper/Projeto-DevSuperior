@@ -57,8 +57,8 @@ exports.addOrder = async (req, res) => {
 	try {
 		let products = [];
 
-		for(const id of req.body.products){
-			const product = await Product.findById(id);
+		for(const item of req.body.products.id){
+			const product = await Product.findById(item.id);
 			products.push(product);
 		}
 
