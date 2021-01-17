@@ -1,4 +1,5 @@
 const Order = require('../models/order-model');
+const OrderStatus = require('../models/order-status');
 const Product = require('../models/product-model');
 
 exports.getAllOrders = async (req, res) => {
@@ -57,19 +58,18 @@ exports.addOrder = async (req, res) => {
 	try {
 		let products = [];
 
-		for(const item of req.body.products){
+		for (const item of req.body.products) {
 			const product = await Product.findById(item.id).select('-__v');
 			products.push(product);
 		}
 
-		if(!products.length){
+		if (!products.length)
 			throw new Error('Um pedido deve conter ao menos um produto.');
-		}
 
 		req.body.products = products;
 
 		const newOrder = await Order.create(req.body);
-		
+
 		res.status(201).json(newOrder);
 	} catch (err) {
 		res.status(400).json({
@@ -110,6 +110,34 @@ exports.deleteOrder = async (req, res) => {
 		res.status(204).json({
 			status: 'success',
 			data: null,
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: 'fail',
+			message: err.message,
+		});
+	}
+};
+
+exports.setStatus = async (req, res) => {
+	try {
+		let newStatus = '';
+		if (req.params.status === 'pending')
+			newStatus = OrderStatus.PENDING;
+		else if (req.params.status === 'delivered')
+			newStatus = OrderStatus.DELIVERED;
+		else
+			throw new Error(
+				'Você deve especificar um status para o pedido'
+			);
+
+		const order = await Order.findByIdAndUpdate(req.params.id, {
+			status: newStatus,
+		});
+
+		res.status(200).json({
+			status: 'success',
+			status: newStatus,
 		});
 	} catch (err) {
 		res.status(400).json({

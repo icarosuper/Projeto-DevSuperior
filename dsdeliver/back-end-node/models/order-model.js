@@ -25,18 +25,18 @@ const orderSchema = new mongoose.Schema({
 	},
 	products: {
 		type: [Product.schema],
-		required: [true, 'Um pedido deve ter ao menos um produto']
+		required: [true, 'Um pedido deve ter ao menos um produto'],
 	},
 });
 
 // Duplicate the ID field.
-orderSchema.virtual('id').get(function(){
-    return this._id.toHexString();
+orderSchema.virtual('id').get(function () {
+	return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
 orderSchema.set('toJSON', {
-    virtuals: true
+	virtuals: true,
 });
 
 const Order = mongoose.model('Orders', orderSchema);
