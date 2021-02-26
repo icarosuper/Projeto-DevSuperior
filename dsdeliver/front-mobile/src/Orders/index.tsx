@@ -43,7 +43,7 @@ function Orders() {
 	)
 
 	const loadingScreen = () => (
-		<Text style={styles.title}>Carregando pedidos</Text>
+		<Text style={styles.loading}>Carregando pedidos</Text>
 	)
 
 	return (
@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
 		paddingLeft: '5%',
 		paddingRight: '5%',
 	},
-	title: {
-	  color: '#263238',
-	  fontSize: 26,
-	  lineHeight: 35,
-	  fontWeight: 'bold',
-	  marginTop: 31,
-	  textAlign: 'center'
+	loading: {
+		color: '#263238',
+		fontSize: 26,
+		lineHeight: 35,
+		fontWeight: 'bold',
+		marginTop: 31,
+		textAlign: 'center',
 	},
 });
 
